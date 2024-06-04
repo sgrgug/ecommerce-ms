@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package product;
+
+option go_package = "github.com/sgrgug/ecommerce-ms";
+
+service ProductService {
+    rpc CreateProduct(CreateProductRequest) returns (ProductResponse) {}
+    rpc GetProduct(GetProductRequest) returns (ProductResponse) {}
+}
+
+message Product {
+    int64 id = 1;
+    string name = 2;
+    string description = 3;
+    double price = 4;
+    int64 quantity = 5;
+    string category = 6;
+}
+
+message CreateProductRequest {
+    Product product = 1;
+}
+
+message ProductResponse {
+    Product product = 1;
+}
+
+message GetProductRequest {
+    Product product = 1;
+}
