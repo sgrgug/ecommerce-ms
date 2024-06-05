@@ -45,7 +45,7 @@ func (s *server) CreateProduct(ctx context.Context, req *pb.CreateProductRequest
 func (s *server) GetProduct(ctx context.Context, req *pb.GetProductRequest) (*pb.ProductResponse, error) {
 	var product model.Product
 
-	if err := s.db.First(&product, req.Product.Id).Error; err != nil {
+	if err := s.db.First(&product, req.Id).Error; err != nil {
 		return nil, err
 	}
 
@@ -71,7 +71,7 @@ func main() {
 
 	db.AutoMigrate(&model.Product{})
 
-	lis, err := net.Listen("tcp", os.Getenv("PRODUCT_SERVICE_SERVER_PORT"))
+	lis, err := net.Listen("tcp", ":60000")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
