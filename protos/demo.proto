@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package e_ws;
+
+option go_package = "github.com/sgrgug/ecommerce-ms";
+
+// --------------- User Service -------------------
+service UserService {
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+    rpc GetUser(GetUserRequest) returns (GetUserResponse);
+}
+
+message User {
+    string id = 1;
+    string username = 2;
+    string email = 3;
+    string password = 4;
+}
+
+message CreateUserRequest {
+    User user = 1;
+}
+
+message CreateUserResponse {
+    User user = 1;
+}
+
+message GetUserRequest {
+    string id = 1;
+}
+
+message GetUserResponse {
+    User user = 1;
+}
+
+
+// --------------- Product Service -------------------
+service ProductService {
+    rpc CreateProduct(CreateProductRequest) returns (ProductResponse) {}
+    rpc GetProduct(GetProductRequest) returns (ProductResponse) {}
+}
+
+message Product {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    double price = 4;
+    uint32 quantity = 5;
+    string category = 6;
+}
+
+message CreateProductRequest {
+    Product product = 1;
+}
+
+message ProductResponse {
+    Product product = 1;
+}
+
+message GetProductRequest {
+    string id = 1;
+}
+
+// --------------- Order Service -------------------
+service OrderService {
+    rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+    rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
+}
+
+message Order {
+    string id = 1;
+    string user_id = 2;
+    string product_id = 3;
+    uint32 quantity = 4;
+    double price = 5;
+    string status = 6;
+}
+
+message CreateOrderRequest {
+    string user_id = 1;
+    string product_id = 2;
+    uint32 quantity = 3;
+    double price = 4;
+}
+
+message CreateOrderResponse {
+    Order order = 1;
+}
+
+message GetOrderRequest {
+    string id = 1;
+}
+
+message GetOrderResponse {
+    Order order = 1;
+}
